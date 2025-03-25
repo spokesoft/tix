@@ -2,14 +2,6 @@ using Tix.Domain.Interfaces;
 
 namespace Tix.Domain.Entities;
 
-public class ProjectComment { }
-public class ProjectMember { }
-public class Label { }
-public class Sequence { }
-public class Ticket { }
-public class Iteration { }
-public class Board { }
-
 public class Project : AuditableEntity<long>, IArchivable
 {
     #region Properties
