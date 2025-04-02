@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <PackageType>Template</PackageType>
+    <PackageVersion>1.0.0</PackageVersion>
+    <PackageId>Tix.Templates</PackageId>
+    <Title>Tix Templates</Title>
+    <Authors>Joseph Trumbull</Authors>
+    <Description>Templates for creating entities, configurations, repositories, and services</Description>
+    <PackageTags>dotnet-new;templates;entity;repository;service</PackageTags>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    
+    <IncludeContentInPack>true</IncludeContentInPack>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
+    <ContentTargetFolders>content</ContentTargetFolders>
+    <NoWarn>$(NoWarn);NU5128</NoWarn>
+    <NoDefaultExcludes>true</NoDefaultExcludes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="content/**/*" Exclude="content/**/bin/**;content/**/obj/**" />
+    <Compile Remove="**/*" />
+  </ItemGroup>
+</Project>

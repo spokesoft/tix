@@ -1,0 +1,6 @@
+@Tix.Api_HostAddress = http://localhost:5243
+
+GET {{Tix.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Joseph Trumbull",
+  "classifications": ["Code"],
+  "identity": "Tix.Domain.Events.Deleted",
+  "name": "Tix Domain Events Deleted",
+  "shortName": "domain:events:deleted",
+  "tags": { "language": "C#", "type": "item" },
+  "preferNameDirectory": false,
+  "symbols": {
+    "entity": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "Name of the entity",
+      "replaces": "GenericEntity",
+      "isRequired": true
+    },
+    "eventFileName": {
+      "type": "derived",
+      "valueSource": "entity",
+      "valueTransform": "eventFileName",
+      "fileRename": "Event",
+      "description": "A value derived from the 'entity' param, used to rename Event.cs"
+    },
+    "handlerFileName": {
+      "type": "derived",
+      "valueSource": "entity",
+      "valueTransform": "handlerFileName",
+      "fileRename": "Handler",
+      "description": "A value derived from the 'entity' param, used to rename Handler.cs"
+    }
+  },
+  "forms": {
+    "eventFileName": {
+      "identifier": "replace",
+      "pattern": "^(.*)$",
+      "replacement": "$1Deleted"
+    },
+    "handlerFileName": {
+      "identifier": "replace",
+      "pattern": "^(.*)$",
+      "replacement": "$1Deleted"
+    }
+  }
+}
