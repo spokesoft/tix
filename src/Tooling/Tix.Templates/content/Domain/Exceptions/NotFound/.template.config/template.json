@@ -21,7 +21,7 @@
     {
       "source": "./",
       "target": "./",
-      "modifiers": [{ "rename": { "Exception": "FileName.cs" } }]
+      "modifiers": [{ "rename": { "Exception": "FileName" } }]
     }
   ]
 }

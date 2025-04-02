@@ -14,32 +14,16 @@
       "description": "Name of the entity",
       "replaces": "GenericEntity",
       "isRequired": true
-    },
-    "eventFileName": {
-      "type": "derived",
-      "valueSource": "entity",
-      "valueTransform": "eventFileName",
-      "fileRename": "Event",
-      "description": "A value derived from the 'entity' param, used to rename Event.cs"
-    },
-    "handlerFileName": {
-      "type": "derived",
-      "valueSource": "entity",
-      "valueTransform": "handlerFileName",
-      "fileRename": "Handler",
-      "description": "A value derived from the 'entity' param, used to rename Handler.cs"
     }
   },
-  "forms": {
-    "eventFileName": {
-      "identifier": "replace",
-      "pattern": "^(.*)$",
-      "replacement": "$1Created"
-    },
-    "handlerFileName": {
-      "identifier": "replace",
-      "pattern": "^(.*)$",
-      "replacement": "$1Created"
+  "sources": [
+    {
+      "source": "./",
+      "target": "./",
+      "modifiers": [
+        { "rename": { "Event": "FileName" } },
+        { "rename": { "Handler": "FileNameHandler" } }
+      ]
     }
-  }
+  ]
 }
