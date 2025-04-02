@@ -10,7 +10,7 @@ public class DomainGeneratorService(ITemplateGeneratorService template, IOutputP
 
     public void GenerateAll(EntityInfo entity)
     {
-        //GenerateDomainEvents(entity);
+        GenerateDomainEvents(entity);
         GenerateDomainExceptions(entity);
     }
 

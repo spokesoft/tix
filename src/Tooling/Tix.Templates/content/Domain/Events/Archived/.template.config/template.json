@@ -7,6 +7,7 @@
   "shortName": "domain:events:archived",
   "tags": { "language": "C#", "type": "item" },
   "preferNameDirectory": false,
+  "sourceName": "FileName",
   "symbols": {
     "entity": {
       "type": "parameter",

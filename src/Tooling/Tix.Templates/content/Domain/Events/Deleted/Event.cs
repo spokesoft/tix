@@ -1,8 +1,6 @@
-using Tix.Domain.Entities;
-
 namespace Tix.Domain.Events.GenericEntity;
 
-public class GenericEntityDeleted : DomainEvent<GenericEntity>
+public class GenericEntityDeleted(long id) : DomainEvent
 {
-    public GenericEntity? GenericEntity { get; set; }
+    public long GenericEntityId { get; init; } = id;
 }

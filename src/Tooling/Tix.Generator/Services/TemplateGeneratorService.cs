@@ -6,7 +6,7 @@ using Tix.Generator.Models;
 
 namespace Tix.Generator.Services;
 
-public class TemplateGeneratorService(IOutputPathService outputPath, bool force = true) : ITemplateGeneratorService
+public class TemplateGeneratorService(IOutputPathService outputPath, bool force = false) : ITemplateGeneratorService
 {
     private readonly IOutputPathService _outputPath = outputPath;
     private readonly bool _force = force;
