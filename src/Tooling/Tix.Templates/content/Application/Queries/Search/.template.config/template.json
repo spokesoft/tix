@@ -1,0 +1,30 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Joseph Trumbull",
+  "classifications": ["Code"],
+  "identity": "Tix.Application.Queries.Search",
+  "name": "Tix Application Queries Search",
+  "shortName": "application:queries:search",
+  "tags": { "language": "C#", "type": "item" },
+  "preferNameDirectory": false,
+  "sourceName": "FileName",
+  "symbols": {
+    "entity": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "Name of the entity",
+      "replaces": "GenericEntity",
+      "isRequired": true
+    }
+  },
+  "sources": [
+    {
+      "source": "./",
+      "target": "./",
+      "modifiers": [
+        { "rename": { "Query": "FileName" } },
+        { "rename": { "Handler": "FileNameHandler" } }
+      ]
+    }
+  ]
+}

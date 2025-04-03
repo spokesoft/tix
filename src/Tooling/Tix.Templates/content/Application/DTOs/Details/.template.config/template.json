@@ -1,0 +1,29 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Joseph Trumbull",
+  "classifications": ["Code"],
+  "identity": "Tix.Application.DTOs.Details",
+  "name": "Tix Application DTOs Details",
+  "shortName": "application:dtos:details",
+  "tags": { "language": "C#", "type": "item" },
+  "preferNameDirectory": false,
+  "sourceName": "FileName",
+  "symbols": {
+    "entity": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "Name of the entity",
+      "replaces": "GenericEntity",
+      "isRequired": true
+    }
+  },
+  "sources": [
+    {
+      "source": "./",
+      "target": "./",
+      "modifiers": [
+        { "rename": { "DTO": "FileName" } }
+      ]
+    }
+  ]
+}

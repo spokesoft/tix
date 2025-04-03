@@ -31,4 +31,9 @@ public class EntityInfo
     /// Relationships to other entities
     /// </summary>
     public IEnumerable<RelationshipInfo> Relationships { get; set; } = [];
+
+    /// <summary>
+    /// Is entity archivable
+    /// </summary>
+    public bool IsArchivable { get; set; } = false;
 }

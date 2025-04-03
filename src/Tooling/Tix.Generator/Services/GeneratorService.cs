@@ -1,21 +1,18 @@
+using Tix.Generator.Generators.Application;
+using Tix.Generator.Generators.Domain;
 using Tix.Generator.Interfaces;
 using Tix.Generator.Models;
 
 namespace Tix.Generator.Services;
 
 public class GeneratorService(
-    ISourceCodeService source, 
-    ITemplateGeneratorService template, 
-    IOutputPathService outputPath)
+    ISourceCodeService source,
+    DomainGenerator domain,
+    ApplicationGenerator application)
 {
     private readonly ISourceCodeService _source = source;
-
-    private readonly DomainGeneratorService _domain = new(template, outputPath);
-    private readonly ApplicationGeneratorService _application = new(template, outputPath);
-    private readonly InfrastructureGeneratorService _infrastructure = new(template, outputPath);
-    private readonly ApiGeneratorService _api = new(template, outputPath);
-    private readonly MvcGeneratorService _mvc = new(template, outputPath);
-    private readonly ConsoleGeneratorService _console = new(template, outputPath);
+    private readonly DomainGenerator _domain = domain;
+    private readonly ApplicationGenerator _application = application;
 
     public void GenerateAll()
     {
@@ -28,11 +25,7 @@ public class GeneratorService(
 
     public void GenerateAll(EntityInfo entity)
     {
-        _domain.GenerateAll(entity);
-        // _application.GenerateAll(entity);
-        // _infrastructure.GenerateAll(entity);
-        // _api.GenerateAll(entity);
-        // _mvc.GenerateAll(entity);
-        // _console.GenerateAll(entity);
+        _domain.Generate(entity);
+        _application.Generate(entity);
     }
 }
