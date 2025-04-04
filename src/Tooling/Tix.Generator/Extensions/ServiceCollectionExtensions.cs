@@ -15,7 +15,6 @@ public static class ServiceCollectionExtensions
                             !t.IsAbstract).ToList();
         foreach (var type in generatorTypes)
         {
-            // Register as both the concrete type and as IGenerator
             services.AddTransient(type);
             services.AddTransient(typeof(IGenerator), type);
         }

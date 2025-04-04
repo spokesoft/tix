@@ -2,6 +2,7 @@ using Tix.Generator.Generators.Application.Commands;
 using Tix.Generator.Generators.Application.DTOs;
 using Tix.Generator.Generators.Application.Interfaces;
 using Tix.Generator.Generators.Application.Queries;
+using Tix.Generator.Generators.Application.Validators;
 using Tix.Generator.Models;
 
 namespace Tix.Generator.Generators.Application;
@@ -25,7 +26,10 @@ public class ApplicationGenerator(
     GetByIdQueryGenerator getByIdQuery,
     GetListQueryGenerator getListQuery,
     SearchQueryGenerator searchQuery,
-    ServiceGenerator service) : Generator
+    ServiceGenerator service,
+    CreateValidatorGenerator createValidator,
+    UpdateValidatorGenerator updateValidator,
+    DeleteValidatorGenerator deleteValidator) : Generator
 {
     private readonly ArchiveCommandGenerator _archiveCommand = archiveCommand;
     private readonly ArchiveRangeCommandGenerator _archiveRangeCommand = archiveRangeCommand;
@@ -46,6 +50,9 @@ public class ApplicationGenerator(
     private readonly GetListQueryGenerator _getListQuery = getListQuery;
     private readonly SearchQueryGenerator _searchQuery = searchQuery;
     private readonly ServiceGenerator _service = service;
+    private readonly CreateValidatorGenerator _createValidator = createValidator;
+    private readonly UpdateValidatorGenerator _updateValidator = updateValidator;
+    private readonly DeleteValidatorGenerator _deleteValidator = deleteValidator;
     
     public override void Generate(EntityInfo entity)
     {
@@ -81,5 +88,10 @@ public class ApplicationGenerator(
 
         // Generate service
         _service.Generate(entity);
+
+        // Generate validators
+        _createValidator.Generate(entity);
+        _updateValidator.Generate(entity);
+        _deleteValidator.Generate(entity);
     }
 }
