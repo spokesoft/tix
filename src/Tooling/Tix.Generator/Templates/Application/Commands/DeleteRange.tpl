@@ -4,5 +4,5 @@ namespace Tix.Application.Commands.{{ name }};
 
 public class Delete{{ name }}RangeCommand : ICommand
 {
-    public IEnumerable<Delete{{ name }}Command> Commands { get; set; } = [];
+    public IEnumerable<{{ tid }}> Ids { get; set; } = [];
 }

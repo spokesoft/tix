@@ -4,5 +4,5 @@ namespace Tix.Application.Commands.{{ name }};
 
 public class Delete{{ name }}Command : ICommand
 {
-
+    public {{ tid }} Id { get; set; }
 }

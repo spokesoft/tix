@@ -4,5 +4,5 @@ namespace Tix.Application.Commands.{{ name }};
 
 public class Restore{{ name }}RangeCommand : ICommand
 {
-    public IEnumerable<Restore{{ name }}Command> Commands { get; set; } = [];
+    public IEnumerable<{{ tid }}> Ids { get; set; } = [];
 }

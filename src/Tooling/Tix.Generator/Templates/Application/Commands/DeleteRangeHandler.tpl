@@ -1,17 +1,11 @@
 namespace Tix.Application.Commands.{{ name }};
 
-public class Delete{{ name }}RangeHandler : CommandHandler<Delete{{ name }}RangeCommand, IEnumerable<long>>
+public class Delete{{ name }}RangeHandler : CommandHandler<Delete{{ name }}RangeCommand, int>
 {
-    public override async Task<IEnumerable<long>> HandleAsync(Delete{{ name }}RangeCommand request, CancellationToken token = default)
+    public override async Task<int> HandleAsync(Delete{{ name }}RangeCommand request, CancellationToken token = default)
     {
-        var createdIds = new List<long>();
-        foreach (var command in request.Commands)
-        {
-            token.ThrowIfCancellationRequested();
-            // TODO: Impltement Delete command
-            var created = await Task.Run(() => 1, token);
-            createdIds.Add(created);
-        }
-        return createdIds;
+        var rowsAffected = 0;
+        // TODO: Implement delete range handler
+        return await Task.FromResult(rowsAffected);
     }
 }
