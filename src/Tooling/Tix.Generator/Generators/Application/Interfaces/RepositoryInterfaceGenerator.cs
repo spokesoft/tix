@@ -1,14 +1,9 @@
-using Tix.Generator.Interfaces;
-using Tix.Generator.Models;
-
 namespace Tix.Generator.Generators.Application.Interfaces;
 
-public class RepositoryInterfaceGenerator(ITemplateGenerator template) : Generator
+public class RepositoryInterfaceGenerator : FileGenerator
 {
-    private readonly ITemplateGenerator _template = template;
-
-    public override void Generate(EntityInfo entity)
+    public override Dictionary<string, string> TemplatePaths { get; set; } = new()
     {
-        _template.Generate("application:interfaces:repository", entity.Name, []);
-    }
+        { "Application/Interfaces/Repository.tpl", "src/Core/Application/Interfaces/Repositories/I{0}Repository.cs" }
+    };
 }

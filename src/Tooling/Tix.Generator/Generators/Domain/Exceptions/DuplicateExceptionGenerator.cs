@@ -1,14 +1,9 @@
-using Tix.Generator.Interfaces;
-using Tix.Generator.Models;
-
 namespace Tix.Generator.Generators.Domain.Exceptions;
 
-public class DuplicateExceptionGenerator(ITemplateGenerator template) : Generator
+public class DuplicateExceptionGenerator : FileGenerator
 {
-    private readonly ITemplateGenerator _template = template;
-    
-    public override void Generate(EntityInfo entity)
+    public override Dictionary<string, string> TemplatePaths { get; set; } = new()
     {
-        _template.Generate("domain:exceptions:duplicate", entity.Name, []);
-    }
+        { "Domain/Exceptions/Duplicate.tpl", "src/Core/Domain/Exceptions/{0}/Duplicate{0}Exception.cs" }
+    };
 }

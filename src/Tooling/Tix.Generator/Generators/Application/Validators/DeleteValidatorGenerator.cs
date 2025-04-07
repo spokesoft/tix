@@ -1,14 +1,9 @@
-using Tix.Generator.Interfaces;
-using Tix.Generator.Models;
-
 namespace Tix.Generator.Generators.Application.Validators;
 
-public class DeleteValidatorGenerator(ITemplateGenerator template) : Generator
+public class DeleteValidatorGenerator : FileGenerator
 {
-    private readonly ITemplateGenerator _template = template;
-
-    public override void Generate(EntityInfo entity)
+    public override Dictionary<string, string> TemplatePaths { get; set; } = new()
     {
-        _template.Generate("application:validators:delete", entity.Name, []);
-    }
+        { "Application/Validators/Delete.tpl", "src/Core/Application/Validators/{0}/Delete{0}Validator.cs" }
+    };
 }

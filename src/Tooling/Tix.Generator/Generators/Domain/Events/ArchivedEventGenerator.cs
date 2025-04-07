@@ -1,14 +1,10 @@
-using Tix.Generator.Interfaces;
-using Tix.Generator.Models;
-
 namespace Tix.Generator.Generators.Domain.Events;
 
-public class ArchivedEventGenerator(ITemplateGenerator template) : Generator
+public class ArchivedEventGenerator : FileGenerator
 {
-    private readonly ITemplateGenerator _template = template;
-
-    public override void Generate(EntityInfo entity)
+    public override Dictionary<string, string> TemplatePaths { get; set; } = new()
     {
-        _template.Generate("domain:events:archived", entity.Name, []);
-    }
+        { "Domain/Events/Archived.tpl", "src/Core/Domain/Events/{0}/{0}Archived.cs" },
+        { "Domain/Events/ArchivedHandler.tpl", "src/Core/Domain/Events/{0}/{0}ArchivedHandler.cs" }
+    };
 }

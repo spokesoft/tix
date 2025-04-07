@@ -1,14 +1,10 @@
-using Tix.Generator.Interfaces;
-using Tix.Generator.Models;
-
 namespace Tix.Generator.Generators.Application.Commands;
 
-public class DeleteCommandGenerator(ITemplateGenerator template) : Generator
+public class DeleteCommandGenerator : FileGenerator
 {
-    private readonly ITemplateGenerator _template = template;
-
-    public override void Generate(EntityInfo entity)
+    public override Dictionary<string, string> TemplatePaths { get; set; } = new()
     {
-        _template.Generate("application:commands:delete", entity.Name, []);
-    }
+        { "Application/Commands/Delete.tpl", "src/Core/Application/Commands/{0}/Delete{0}Command.cs" },
+        { "Application/Commands/DeleteHandler.tpl", "src/Core/Application/Commands/{0}/Delete{0}Handler.cs" }
+    };
 }

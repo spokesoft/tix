@@ -1,14 +1,10 @@
-using Tix.Generator.Interfaces;
-using Tix.Generator.Models;
-
 namespace Tix.Generator.Generators.Application.Commands;
 
-public class DeleteRangeCommandGenerator(ITemplateGenerator template) : Generator
+public class DeleteRangeCommandGenerator : FileGenerator
 {
-    private readonly ITemplateGenerator _template = template;
-
-    public override void Generate(EntityInfo entity)
+    public override Dictionary<string, string> TemplatePaths { get; set; } = new()
     {
-        _template.Generate("application:commands:deleterange", entity.Name, []);
-    }
+        { "Application/Commands/DeleteRange.tpl", "src/Core/Application/Commands/{0}/Delete{0}RangeCommand.cs" },
+        { "Application/Commands/DeleteRangeHandler.tpl", "src/Core/Application/Commands/{0}/Delete{0}RangeHandler.cs" }
+    };
 }

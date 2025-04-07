@@ -11,6 +11,11 @@ public class EntityInfo
     public string Name { get; set; } = string.Empty;
 
     /// <summary>
+    /// Type of the primary key
+    /// </summary>
+    public string PrimaryKeyType { get; set; } = string.Empty;
+
+    /// <summary>
     /// The fully qualified name of the entity
     /// </summary>
     public string FullName { get; set; } = string.Empty;

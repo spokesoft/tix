@@ -1,14 +1,10 @@
-using Tix.Generator.Interfaces;
-using Tix.Generator.Models;
-
 namespace Tix.Generator.Generators.Application.Commands;
 
-public class UpdateRangeCommandGenerator(ITemplateGenerator template) : Generator
+public class UpdateRangeCommandGenerator : FileGenerator
 {
-    private readonly ITemplateGenerator _template = template;
-
-    public override void Generate(EntityInfo entity)
+    public override Dictionary<string, string> TemplatePaths { get; set; } = new()
     {
-        _template.Generate("application:commands:updaterange", entity.Name, []);
-    }
+        { "Application/Commands/UpdateRange.tpl", "src/Core/Application/Commands/{0}/Update{0}RangeCommand.cs" },
+        { "Application/Commands/UpdateRangeHandler.tpl", "src/Core/Application/Commands/{0}/Update{0}RangeHandler.cs" }
+    };
 }

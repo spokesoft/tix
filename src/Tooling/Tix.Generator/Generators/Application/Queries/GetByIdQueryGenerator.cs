@@ -1,14 +1,10 @@
-using Tix.Generator.Interfaces;
-using Tix.Generator.Models;
-
 namespace Tix.Generator.Generators.Application.Queries;
 
-public class GetByIdQueryGenerator(ITemplateGenerator template) : Generator
+public class GetByIdQueryGenerator : FileGenerator
 {
-    private readonly ITemplateGenerator _template = template;
-
-    public override void Generate(EntityInfo entity)
+    public override Dictionary<string, string> TemplatePaths { get; set; } = new()
     {
-        _template.Generate("application:queries:getbyid", entity.Name, []);
-    }
+        { "Application/Queries/GetById.tpl", "src/Core/Application/Queries/{0}/Get{0}ByIdQuery.cs" },
+        { "Application/Queries/GetByIdHandler.tpl", "src/Core/Application/Queries/{0}/Get{0}ByIdHandler.cs" }
+    };
 }

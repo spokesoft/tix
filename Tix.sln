@@ -69,8 +69,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tooling", "Tooling", "{F9FC
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tix.Generator", "src\Tooling\Tix.Generator\Tix.Generator.csproj", "{B6659828-26B9-47E5-8258-B316E2C0969F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tix.Templates", "src\Tooling\Tix.Templates\Tix.Templates.csproj", "{ABEFAE61-EC64-4A54-B99E-FE9421805A2B}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -173,10 +171,6 @@ Global
 		{B6659828-26B9-47E5-8258-B316E2C0969F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B6659828-26B9-47E5-8258-B316E2C0969F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B6659828-26B9-47E5-8258-B316E2C0969F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{ABEFAE61-EC64-4A54-B99E-FE9421805A2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{ABEFAE61-EC64-4A54-B99E-FE9421805A2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{ABEFAE61-EC64-4A54-B99E-FE9421805A2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{ABEFAE61-EC64-4A54-B99E-FE9421805A2B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -214,6 +208,5 @@ Global
 		{662E83C0-FF01-4B0A-A53F-9F2344D6ED6C} = {E2084841-1E42-4F6E-89D5-E05455A54A98}
 		{F9FC2A09-4E3C-448F-AA2B-9B98E4821099} = {7919B3A5-8A0E-40AB-87B4-5ACB13DFD99A}
 		{B6659828-26B9-47E5-8258-B316E2C0969F} = {F9FC2A09-4E3C-448F-AA2B-9B98E4821099}
-		{ABEFAE61-EC64-4A54-B99E-FE9421805A2B} = {F9FC2A09-4E3C-448F-AA2B-9B98E4821099}
 	EndGlobalSection
 EndGlobal

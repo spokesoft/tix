@@ -1,14 +1,9 @@
-using Tix.Generator.Interfaces;
-using Tix.Generator.Models;
-
 namespace Tix.Generator.Generators.Application.Interfaces;
 
-public class ServiceInterfaceGenerator(ITemplateGenerator template) : Generator
+public class ServiceInterfaceGenerator : FileGenerator
 {
-    private readonly ITemplateGenerator _template = template;
-
-    public override void Generate(EntityInfo entity)
+    public override Dictionary<string, string> TemplatePaths { get; set; } = new()
     {
-        _template.Generate("application:interfaces:service", entity.Name, []);
-    }
+        { "Application/Interfaces/Service.tpl", "src/Core/Application/Interfaces/Services/I{0}Service.cs" }
+    };
 }

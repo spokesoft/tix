@@ -1,14 +1,10 @@
-using Tix.Generator.Interfaces;
-using Tix.Generator.Models;
-
 namespace Tix.Generator.Generators.Domain.Events;
 
-public class UpdatedEventGenerator(ITemplateGenerator template) : Generator
+public class UpdatedEventGenerator : FileGenerator
 {
-    private readonly ITemplateGenerator _template = template;
-
-    public override void Generate(EntityInfo entity)
+    public override Dictionary<string, string> TemplatePaths { get; set; } = new()
     {
-        _template.Generate("domain:events:updated", entity.Name, []);
-    }
+        { "Domain/Events/Updated.tpl", "src/Core/Domain/Events/{0}/{0}Updated.cs" },
+        { "Domain/Events/UpdatedHandler.tpl", "src/Core/Domain/Events/{0}/{0}UpdatedHandler.cs" }
+    };
 }

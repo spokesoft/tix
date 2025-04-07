@@ -1,14 +1,10 @@
-using Tix.Generator.Interfaces;
-using Tix.Generator.Models;
-
 namespace Tix.Generator.Generators.Application.Commands;
 
-public class RestoreRangeCommandGenerator(ITemplateGenerator template) : Generator
+public class RestoreRangeCommandGenerator : FileGenerator
 {
-    private readonly ITemplateGenerator _template = template;
-
-    public override void Generate(EntityInfo entity)
+    public override Dictionary<string, string> TemplatePaths { get; set; } = new()
     {
-        _template.Generate("application:commands:restorerange", entity.Name, []);
-    }
+        { "Application/Commands/RestoreRange.tpl", "src/Core/Application/Commands/{0}/Restore{0}RangeCommand.cs" },
+        { "Application/Commands/RestoreRangeHandler.tpl", "src/Core/Application/Commands/{0}/Restore{0}RangeHandler.cs" }
+    };
 }

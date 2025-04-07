@@ -20,12 +20,10 @@ public class ApplicationGenerator(
     UpdateRangeCommandGenerator updateRangeCommand,
     DetailsDtoGenerator detailsDto,
     ListItemDtoGenerator listItemDto,
-    SelectListItemDtoGenerator selectListItemDto,
     RepositoryInterfaceGenerator repositoryInterface,
     ServiceInterfaceGenerator serviceInterface,
     GetByIdQueryGenerator getByIdQuery,
     GetListQueryGenerator getListQuery,
-    SearchQueryGenerator searchQuery,
     ServiceGenerator service,
     CreateValidatorGenerator createValidator,
     UpdateValidatorGenerator updateValidator,
@@ -43,55 +41,51 @@ public class ApplicationGenerator(
     private readonly UpdateRangeCommandGenerator _updateRangeCommand = updateRangeCommand;
     private readonly DetailsDtoGenerator _detailsDto = detailsDto;
     private readonly ListItemDtoGenerator _listItemDto = listItemDto;
-    private readonly SelectListItemDtoGenerator _selectListItemDto = selectListItemDto;
     private readonly RepositoryInterfaceGenerator _repositoryInterface = repositoryInterface;
     private readonly ServiceInterfaceGenerator _serviceInterface = serviceInterface;
     private readonly GetByIdQueryGenerator _getByIdQuery = getByIdQuery;
     private readonly GetListQueryGenerator _getListQuery = getListQuery;
-    private readonly SearchQueryGenerator _searchQuery = searchQuery;
     private readonly ServiceGenerator _service = service;
     private readonly CreateValidatorGenerator _createValidator = createValidator;
     private readonly UpdateValidatorGenerator _updateValidator = updateValidator;
     private readonly DeleteValidatorGenerator _deleteValidator = deleteValidator;
     
-    public override void Generate(EntityInfo entity)
+    public override async Task GenerateAsync(EntityInfo entity, CancellationToken token = default)
     {
         // Generate commands
-        _createCommand.Generate(entity);
-        _createRangeCommand.Generate(entity);
-        _deleteCommand.Generate(entity);
-        _deleteRangeCommand.Generate(entity);
-        _updateCommand.Generate(entity);
-        _updateRangeCommand.Generate(entity);
+        await _createCommand.GenerateAsync(entity, token);
+        await _createRangeCommand.GenerateAsync(entity, token);
+        await _deleteCommand.GenerateAsync(entity, token);
+        await _deleteRangeCommand.GenerateAsync(entity, token);
+        await _updateCommand.GenerateAsync(entity, token);
+        await _updateRangeCommand.GenerateAsync(entity, token);
 
         if (entity.IsArchivable)
         {
-            _archiveCommand.Generate(entity);
-            _archiveRangeCommand.Generate(entity);
-            _restoreCommand.Generate(entity);
-            _restoreRangeCommand.Generate(entity);
+            await _archiveCommand.GenerateAsync(entity, token);
+            await _archiveRangeCommand.GenerateAsync(entity, token);
+            await _restoreCommand.GenerateAsync(entity, token);
+            await _restoreRangeCommand.GenerateAsync(entity, token);
         }
 
         // Generate DTOs
-        _detailsDto.Generate(entity);
-        _listItemDto.Generate(entity);
-        _selectListItemDto.Generate(entity);
+        await _detailsDto.GenerateAsync(entity, token);
+        await _listItemDto.GenerateAsync(entity, token);
 
         // Generate interfaces
-        _repositoryInterface.Generate(entity);
-        _serviceInterface.Generate(entity);
+        await _repositoryInterface.GenerateAsync(entity, token);
+        await _serviceInterface.GenerateAsync(entity, token);
 
         // Generate queries
-        _getByIdQuery.Generate(entity);
-        _getListQuery.Generate(entity);
-        _searchQuery.Generate(entity);
+        await _getByIdQuery.GenerateAsync(entity, token);
+        await _getListQuery.GenerateAsync(entity, token);
 
         // Generate service
-        _service.Generate(entity);
+        await _service.GenerateAsync(entity, token);
 
         // Generate validators
-        _createValidator.Generate(entity);
-        _updateValidator.Generate(entity);
-        _deleteValidator.Generate(entity);
+        await _createValidator.GenerateAsync(entity, token);
+        await _updateValidator.GenerateAsync(entity, token);
+        await _deleteValidator.GenerateAsync(entity, token);
     }
 }

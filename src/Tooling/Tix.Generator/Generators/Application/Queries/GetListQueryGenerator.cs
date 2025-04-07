@@ -1,14 +1,10 @@
-using Tix.Generator.Interfaces;
-using Tix.Generator.Models;
-
 namespace Tix.Generator.Generators.Application.Queries;
 
-public class GetListQueryGenerator(ITemplateGenerator template) : Generator
+public class GetListQueryGenerator : FileGenerator
 {
-    private readonly ITemplateGenerator _template = template;
-
-    public override void Generate(EntityInfo entity)
+    public override Dictionary<string, string> TemplatePaths { get; set; } = new()
     {
-        _template.Generate("application:queries:getlist", entity.Name, []);
-    }
+        { "Application/Queries/GetList.tpl", "src/Core/Application/Queries/{0}/Get{0}ListQuery.cs" },
+        { "Application/Queries/GetListHandler.tpl", "src/Core/Application/Queries/{0}/Get{0}ListHandler.cs" }
+    };
 }

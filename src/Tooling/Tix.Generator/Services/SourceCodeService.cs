@@ -34,18 +34,66 @@ public class SourceCodeService : ISourceCodeService
         foreach (var entityType in entityTypes)
         {
             var properties = entityType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-
+            var etype = entityType ?? throw new ArgumentNullException(nameof(entityType));
             var entityInfo = new EntityInfo
             {
                 Name = entityType.Name,
                 FullName = entityType?.FullName ?? "FakeEntityName",
                 ReadableProperties = GetReadableProperties(properties, entityNames),
                 WritableProperties = GetWritableProperties(properties, entityNames),
-                Relationships = GetRelationships(properties, entityNames)
+                Relationships = GetRelationships(properties, entityNames),
+                IsArchivable = Implements(entityType ?? throw new ArgumentNullException(), typeof(IArchivable)),
+                PrimaryKeyType = GetIdTypeIfKeyedEntity(entityType) ?? "long"
             };
 
             yield return entityInfo;
         }
+    }
+
+    /// <summary>
+    /// Determines if a type implements a specific interface, including interfaces inherited from parent classes
+    /// </summary>
+    /// <param name="type">The type to check</param>
+    /// <param name="interfaceType">The interface type to check for</param>
+    /// <returns>True if the type implements the interface, false otherwise</returns>
+    private static bool Implements(Type type, Type interfaceType)
+    {
+        if (!interfaceType.IsGenericTypeDefinition)
+        {
+            return interfaceType.IsAssignableFrom(type);
+        }
+
+        foreach (var implementedInterface in type.GetInterfaces())
+        {
+            if (implementedInterface.IsGenericType &&
+                implementedInterface.GetGenericTypeDefinition() == interfaceType)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// Determines if the type implements IKeyedEntity<TId> and returns the ID type name
+    /// </summary>
+    private static string? GetIdTypeIfKeyedEntity(Type entityType)
+    {
+        // Check all interfaces implemented by this type
+        foreach (var interfaceType in entityType.GetInterfaces())
+        {
+            if (interfaceType.IsGenericType &&
+                interfaceType.GetGenericTypeDefinition() == typeof(IKeyedEntity<>))
+            {
+
+                // Get the generic type parameter (TId)
+                var idType = interfaceType.GetGenericArguments()[0];
+                return GetFriendlyTypeName(idType);
+            }
+        }
+
+        return null;
     }
 
     private static IEnumerable<Models.PropertyInfo> GetReadableProperties(
@@ -167,7 +215,7 @@ public class SourceCodeService : ISourceCodeService
         {
             Name = property.Name,
             Type = GetFriendlyTypeName(property.PropertyType),
-            IsNullable = IsNullableType(property.PropertyType),
+            IsNullable = IsNullableProperty(property),
             IsCollection = IsCollectionType(property.PropertyType),
             ElementType = GetElementTypeName(property.PropertyType)
         };
@@ -175,13 +223,6 @@ public class SourceCodeService : ISourceCodeService
 
     private static string GetFriendlyTypeName(Type type)
     {
-        // Handle nullable value types
-        if (IsNullableType(type))
-        {
-            Type underlyingType = Nullable.GetUnderlyingType(type) ?? throw new ArgumentNullException(nameof(type));
-            return GetFriendlyTypeName(underlyingType);
-        }
-
         // Handle collection types
         if (IsCollectionType(type))
         {
@@ -228,9 +269,9 @@ public class SourceCodeService : ISourceCodeService
         };
     }
 
-    private static bool IsNullableType(Type type)
+    private static bool IsNullableProperty(System.Reflection.PropertyInfo propertyInfo)
     {
-        return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
+        return new NullabilityInfoContext().Create(propertyInfo).WriteState is NullabilityState.Nullable;
     }
 
     private static bool IsCollectionType(Type type)

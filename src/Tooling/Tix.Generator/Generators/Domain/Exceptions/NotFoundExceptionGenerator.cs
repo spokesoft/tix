@@ -1,14 +1,9 @@
-using Tix.Generator.Interfaces;
-using Tix.Generator.Models;
-
 namespace Tix.Generator.Generators.Domain.Exceptions;
 
-public class NotFoundExceptionGenerator(ITemplateGenerator template) : Generator
+public class NotFoundExceptionGenerator : FileGenerator
 {
-    private readonly ITemplateGenerator _template = template;
-
-    public override void Generate(EntityInfo entity)
+    public override Dictionary<string, string> TemplatePaths { get; set; } = new()
     {
-        _template.Generate("domain:exceptions:notfound", entity.Name, []);
-    }
+        { "Domain/Exceptions/NotFound.tpl", "src/Core/Domain/Exceptions/{0}/{0}NotFoundException.cs" }
+    };
 }

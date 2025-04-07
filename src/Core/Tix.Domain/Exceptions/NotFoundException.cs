@@ -5,3 +5,5 @@ public class NotFoundException(string type, string id)
 {
 
 }
+
+public class NotFoundException<T, TId>(TId id) : NotFoundException(nameof(T), id?.ToString() ?? "") {}

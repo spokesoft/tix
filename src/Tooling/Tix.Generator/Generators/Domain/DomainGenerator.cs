@@ -21,14 +21,18 @@ public class DomainGenerator(
     private readonly DuplicateExceptionGenerator _duplicateException = duplicateException;
     private readonly NotFoundExceptionGenerator _notFoundException = notFoundException;
     
-    public override void Generate(EntityInfo entity)
+    public override async Task GenerateAsync(EntityInfo entity, CancellationToken token = default)
     {
-        _archivedEvent.Generate(entity);
-        _createdEvent.Generate(entity);
-        _deletedEvent.Generate(entity);
-        _restoredEvent.Generate(entity);
-        _updatedEvent.Generate(entity);
-        _duplicateException.Generate(entity);
-        _notFoundException.Generate(entity);
+        await _createdEvent.GenerateAsync(entity, token);
+        await _updatedEvent.GenerateAsync(entity, token);
+        await _deletedEvent.GenerateAsync(entity, token);
+        
+        if (entity.IsArchivable)
+        {
+            await _archivedEvent.GenerateAsync(entity, token);
+            await _restoredEvent.GenerateAsync(entity, token);
+        }
+        
+        await _notFoundException.GenerateAsync(entity, token);
     }
 }

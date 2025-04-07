@@ -1,14 +1,10 @@
-using Tix.Generator.Interfaces;
-using Tix.Generator.Models;
-
 namespace Tix.Generator.Generators.Application.Commands;
 
-public class RestoreCommandGenerator(ITemplateGenerator template) : Generator
+public class RestoreCommandGenerator : FileGenerator
 {
-    private readonly ITemplateGenerator _template = template;
-
-    public override void Generate(EntityInfo entity)
+    public override Dictionary<string, string> TemplatePaths { get; set; } = new()
     {
-        _template.Generate("application:commands:restore", entity.Name, []);
-    }
+        { "Application/Commands/Restore.tpl", "src/Core/Application/Commands/{0}/Restore{0}Command.cs" },
+        { "Application/Commands/RestoreHandler.tpl", "src/Core/Application/Commands/{0}/Restore{0}Handler.cs" }
+    };
 }

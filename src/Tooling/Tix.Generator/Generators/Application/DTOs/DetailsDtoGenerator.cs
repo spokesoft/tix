@@ -1,14 +1,9 @@
-using Tix.Generator.Interfaces;
-using Tix.Generator.Models;
-
 namespace Tix.Generator.Generators.Application.DTOs;
 
-public class DetailsDtoGenerator(ITemplateGenerator template) : Generator
+public class DetailsDtoGenerator : FileGenerator
 {
-    private readonly ITemplateGenerator _template = template;
-
-    public override void Generate(EntityInfo entity)
+    public override Dictionary<string, string> TemplatePaths { get; set; } = new()
     {
-        _template.Generate("application:dtos:details", entity.Name, []);
-    }
+        { "Application/DTOs/Details.tpl", "src/Core/Application/DTOs/{0}/{0}DetailsDto.cs" }
+    };
 }

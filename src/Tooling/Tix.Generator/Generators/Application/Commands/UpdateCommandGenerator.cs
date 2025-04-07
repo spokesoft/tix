@@ -1,14 +1,10 @@
-using Tix.Generator.Interfaces;
-using Tix.Generator.Models;
-
 namespace Tix.Generator.Generators.Application.Commands;
 
-public class UpdateCommandGenerator(ITemplateGenerator template) : Generator
+public class UpdateCommandGenerator : FileGenerator
 {
-    private readonly ITemplateGenerator _template = template;
-
-    public override void Generate(EntityInfo entity)
+    public override Dictionary<string, string> TemplatePaths { get; set; } = new()
     {
-        _template.Generate("application:commands:update", entity.Name, []);
-    }
+        { "Application/Commands/Update.tpl", "src/Core/Application/Commands/{0}/Update{0}Command.cs" },
+        { "Application/Commands/UpdateHandler.tpl", "src/Core/Application/Commands/{0}/Update{0}Handler.cs" }
+    };
 }

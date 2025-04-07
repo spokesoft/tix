@@ -1,5 +1,7 @@
-using Tix.Domain.Interfaces;
-
 namespace Tix.Domain.Entities;
 
-public class Board : IEntity { }
+public class Board : AuditableEntity<long> 
+{
+    public string? Name { get; set; }
+    public string? Description { get; set; }
+}

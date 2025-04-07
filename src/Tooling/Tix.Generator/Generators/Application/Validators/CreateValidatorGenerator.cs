@@ -1,14 +1,9 @@
-using Tix.Generator.Interfaces;
-using Tix.Generator.Models;
-
 namespace Tix.Generator.Generators.Application.Validators;
 
-public class CreateValidatorGenerator(ITemplateGenerator template) : Generator
+public class CreateValidatorGenerator : FileGenerator
 {
-    private readonly ITemplateGenerator _template = template;
-
-    public override void Generate(EntityInfo entity)
+    public override Dictionary<string, string> TemplatePaths { get; set; } = new()
     {
-        _template.Generate("application:validators:create", entity.Name, []);
-    }
+        { "Application/Validators/Create.tpl", "src/Core/Application/Validators/{0}/Create{0}Validator.cs" }
+    };
 }

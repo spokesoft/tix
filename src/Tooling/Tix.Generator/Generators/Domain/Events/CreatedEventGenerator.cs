@@ -1,14 +1,10 @@
-using Tix.Generator.Interfaces;
-using Tix.Generator.Models;
-
 namespace Tix.Generator.Generators.Domain.Events;
 
-public class CreatedEventGenerator(ITemplateGenerator template) : Generator
+public class CreatedEventGenerator : FileGenerator
 {
-    private readonly ITemplateGenerator _template = template;
-
-    public override void Generate(EntityInfo entity)
+    public override Dictionary<string, string> TemplatePaths { get; set; } = new()
     {
-        _template.Generate("domain:events:created", entity.Name, []);
-    }
+        { "Domain/Events/Created.tpl", "src/Core/Domain/Events/{0}/{0}Created.cs" },
+        { "Domain/Events/CreatedHandler.tpl", "src/Core/Domain/Events/{0}/{0}CreatedHandler.cs" }
+    };
 }
