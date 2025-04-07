@@ -4,9 +4,9 @@ using Tix.Domain.Entities;
 
 namespace Tix.Infrastructure.Common.Configurations;
 
-public class {{ name }}TypeConfiguration : IEntityTypeConfiguration<{{ name }}>
+public class SampleTypeConfiguration : IEntityTypeConfiguration<Board>
 {
-    public void Configure(EntityTypeBuilder<{{ name }}> builder)
+    public void Configure(EntityTypeBuilder<Board> builder)
     {
         // TODO: Implement
     }

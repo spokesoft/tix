@@ -1,6 +1,6 @@
 using Tix.Application.Interfaces.Repositories;
 
-namespace Tix.Infrastructure.Repositories;
+namespace Tix.Infrastructure.Common.Repositories;
 
 public abstract class RepositoryBase : IRepository
 {
