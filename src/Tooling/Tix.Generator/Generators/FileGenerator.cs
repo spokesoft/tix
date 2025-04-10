@@ -1,4 +1,3 @@
-using System.Text.Json;
 using Scriban;
 using Scriban.Runtime;
 using Tix.Generator.Models;
@@ -53,11 +52,11 @@ public abstract class FileGenerator : Generator
             string result = await template.RenderAsync(context);
             await File.WriteAllTextAsync(outputPath, result);
             
-            Console.WriteLine($"Generated: {outputPath}");
+            System.Console.WriteLine($"Generated: {outputPath}");
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Error generating {outputPath}: {ex.Message}");
+            System.Console.WriteLine($"Error generating {outputPath}: {ex.Message}");
             throw;
         }
     }

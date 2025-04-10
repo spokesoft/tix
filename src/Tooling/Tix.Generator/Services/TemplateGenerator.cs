@@ -46,22 +46,22 @@ public class TemplateGenerator(
                 
                 if (process.ExitCode == 0)
                 {
-                    Console.WriteLine($"Successfully generated {templateId} for {entityName}");
+                    System.Console.WriteLine($"Successfully generated {templateId} for {entityName}");
                 }
                 else
                 {
                     var error = process.StandardError.ReadToEnd();
-                    Console.WriteLine($"Error generating template:\n\n{error}");
+                    System.Console.WriteLine($"Error generating template:\n\n{error}");
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Failed to execute dotnet new command: {ex.Message}");
+                System.Console.WriteLine($"Failed to execute dotnet new command: {ex.Message}");
             }
         }
         else
         {
-            Console.WriteLine($"Skipped {templateId} for {entityName}. Already exists.");
+            System.Console.WriteLine($"Skipped {templateId} for {entityName}. Already exists.");
         }
     }
 }
