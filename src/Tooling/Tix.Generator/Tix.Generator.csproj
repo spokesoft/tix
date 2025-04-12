@@ -4,6 +4,7 @@
     <ProjectReference Include="..\..\Core\Tix.Domain\Tix.Domain.csproj" />
     <ProjectReference Include="..\..\Core\Tix.Application\Tix.Application.csproj" />
     <ProjectReference Include="..\..\Infrastructure\Tix.Infrastructure.Common\Tix.Infrastructure.Common.csproj" />
+    <ProjectReference Include="..\..\Presentation\Console\Tix.Console.Tool\Tix.Console.Tool.csproj" />
   </ItemGroup>
 
   <ItemGroup>

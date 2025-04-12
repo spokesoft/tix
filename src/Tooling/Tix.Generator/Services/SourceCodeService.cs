@@ -102,7 +102,7 @@ public class SourceCodeService : ISourceCodeService
     {
         return properties
             .Where(p => p.CanRead && !IsRelationshipProperty(p, entityNames))
-            .Select(p => CreatePropertyInfo(p));
+            .Select(CreatePropertyInfo);
     }
 
     private static IEnumerable<Models.PropertyInfo> GetWritableProperties(
@@ -223,6 +223,12 @@ public class SourceCodeService : ISourceCodeService
 
     private static string GetFriendlyTypeName(Type type)
     {
+        if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
+        {
+            var underlyingType = Nullable.GetUnderlyingType(type);
+            return GetFriendlyTypeName(underlyingType ?? throw new Exception("Could not determine nullable type"));
+        }
+
         // Handle collection types
         if (IsCollectionType(type))
         {
@@ -271,6 +277,9 @@ public class SourceCodeService : ISourceCodeService
 
     private static bool IsNullableProperty(System.Reflection.PropertyInfo propertyInfo)
     {
+        if (propertyInfo.PropertyType.IsGenericType && 
+            propertyInfo.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
+            return true;
         return new NullabilityInfoContext().Create(propertyInfo).WriteState is NullabilityState.Nullable;
     }
 

@@ -26,15 +26,16 @@ public abstract class FileGenerator : Generator
         => string.Format(outputFormat, entity.Name);
 
     public virtual object ResolveModel(EntityInfo entity)
-    {
-        return new { name = entity.Name, tid = entity.PrimaryKeyType };
-    }
+        => new { name = entity.Name, tid = entity.PrimaryKeyType };
 
     private static async Task RenderAsync(string templatePath, string outputPath, object model)
     {
         try
         {
-            var directory = Path.GetDirectoryName(outputPath);
+            // var solutionPath = GetSolutionPath();
+            var solutionPath = "./";
+            var path = Path.Join(solutionPath, outputPath);
+            var directory = Path.GetDirectoryName(path);
             if (directory != null && !Directory.Exists(directory))
             {
                 Directory.CreateDirectory(directory);
@@ -50,8 +51,8 @@ public abstract class FileGenerator : Generator
             context.PushGlobal(data);
 
             string result = await template.RenderAsync(context);
-            await File.WriteAllTextAsync(outputPath, result);
-            
+            await File.WriteAllTextAsync(path, result);
+
             System.Console.WriteLine($"Generated: {outputPath}");
         }
         catch (Exception ex)
@@ -59,5 +60,21 @@ public abstract class FileGenerator : Generator
             System.Console.WriteLine($"Error generating {outputPath}: {ex.Message}");
             throw;
         }
+    }
+
+    private static string GetSolutionPath()
+    {
+        var directory = new DirectoryInfo(Environment.CurrentDirectory);
+        while (directory != null)
+        {
+            var solutionFiles = directory.GetFiles("*.sln");
+            if (solutionFiles.Length > 0)
+            {
+                return directory.FullName;
+            }
+
+            directory = directory.Parent;
+        }
+        throw new Exception("Solution file was not found.");
     }
 }

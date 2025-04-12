@@ -4,6 +4,6 @@ public class DuplicateExceptionGenerator : FileGenerator
 {
     public override Dictionary<string, string> TemplatePaths { get; set; } = new()
     {
-        { "Domain/Exceptions/Duplicate.tpl", "src/Core/Domain/Exceptions/{0}/Duplicate{0}Exception.cs" }
+        { "Domain/Exceptions/Duplicate.tpl", "src/Core/Tix.Domain/Exceptions/{0}/Duplicate{0}Exception.cs" }
     };
 }

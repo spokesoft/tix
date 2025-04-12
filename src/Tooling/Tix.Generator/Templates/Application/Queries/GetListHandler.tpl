@@ -2,15 +2,12 @@ using Tix.Application.DTOs.{{ name }};
 
 namespace Tix.Application.Queries.{{ name }};
 
-public class Get{{ name }}ListHandler : QueryHandler<Get{{ name }}ListQuery, {{ name }}DetailsDto>
+public class Get{{ name }}ListHandler : QueryHandler<Get{{ name }}ListQuery, IEnumerable<{{ name }}ListItemDto>>
 {
-    public override async Task<{{ name }}DetailsDto> HandleAsync(Get{{ name }}ListQuery query, CancellationToken token = default)
+    public override async Task<IEnumerable<{{ name }}ListItemDto>> HandleAsync(Get{{ name }}ListQuery query, CancellationToken token = default)
     {
         token.ThrowIfCancellationRequested();
-        var dto = new {{ name }}DetailsDto
-        {
-            // TODO: Implement query
-        };
-        return await Task.FromResult(dto);
+        var list = new List<{{ name }}ListItemDto>();
+        return await Task.FromResult(list);
     }
 }

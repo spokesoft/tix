@@ -7,8 +7,8 @@ public class CreateCommandGenerator : FileGenerator
 {
     public override Dictionary<string, string> TemplatePaths { get; set; } = new()
     {
-        { "Application/Commands/Create.tpl", "src/Core/Application/Commands/{0}/Create{0}Command.cs" },
-        { "Application/Commands/CreateHandler.tpl", "src/Core/Application/Commands/{0}/Create{0}Handler.cs" }
+        { "Application/Commands/Create.tpl", "src/Core/Tix.Application/Commands/{0}/Create{0}Command.cs" },
+        { "Application/Commands/CreateHandler.tpl", "src/Core/Tix.Application/Commands/{0}/Create{0}Handler.cs" }
     };
 
     public override object ResolveModel(EntityInfo entity)
