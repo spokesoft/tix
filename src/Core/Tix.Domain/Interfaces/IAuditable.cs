@@ -2,7 +2,7 @@ using Tix.Domain.Entities;
 
 namespace Tix.Domain.Interfaces;
 
-public interface IAuditable
+public interface IAuditable : IEntity
 {
     DateTime CreatedAt { get; }
     DateTime UpdatedAt { get; }
@@ -15,4 +15,6 @@ public interface IAuditable
     User? DeletedBy { get; }
 }
 
-public interface IAuditable<TId> : IAuditable, IKeyedEntity<TId> {}
+public interface IAuditable<TId> : IAuditable {
+    TId Id { get; }
+}

@@ -2,7 +2,7 @@ using Tix.Domain.Interfaces;
 
 namespace Tix.Domain.Entities;
 
-public abstract class AuditableEntity : Entity, IAuditable
+public abstract class AuditableEntity : IAuditable
 {
     public DateTime CreatedAt { get ; private set; }
     public DateTime UpdatedAt { get ; private set; }

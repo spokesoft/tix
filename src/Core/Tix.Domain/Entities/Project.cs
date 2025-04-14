@@ -14,6 +14,7 @@ public class Project : AuditableEntity<long>, IArchivable
     public string? Description { get; set; }
 
     #endregion
+
     #region IArchivable Implementation
 
     public DateTime? ArchivedAt { get; private set; }
@@ -24,6 +25,7 @@ public class Project : AuditableEntity<long>, IArchivable
     public bool IsArchived => ArchivedAt.HasValue;
 
     #endregion
+    
     #region Navigation Properties
 
     protected IList<Sequence> _sequences { get; set; } = [];

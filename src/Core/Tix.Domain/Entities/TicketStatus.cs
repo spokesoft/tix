@@ -2,4 +2,4 @@ using Tix.Domain.Interfaces;
 
 namespace Tix.Domain.Entities;
 
-public class Sequence : IInternalEntity { }
+public class TicketStatus : IEntity { }
